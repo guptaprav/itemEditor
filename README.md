@@ -1,7 +1,7 @@
 # Item Editor
 Items data: resources/data/itemList.js
 
-**Application used only Create_React_App**
+> ***Application used only Create_React_App***
 
 State management is via Context / Reducer hooks
 
