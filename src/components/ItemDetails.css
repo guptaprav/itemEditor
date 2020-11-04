@@ -1,0 +1,44 @@
+.field-container {
+  margin: 10px 0px 0px -50px;
+  position: relative;
+  min-width: 200px;
+}
+
+.field-label {
+  color: #2e2e2e;
+  font-weight: 400;
+  line-height: 16px;
+  font-size: small;
+  padding: 4px 0px 4px 0px;
+}
+
+input[type="text"] {
+  border: 1px solid #0e62ad;
+  width: 100%;
+  max-width: 300px;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+input[type="checkbox"] {
+  border: 1px solid #0e62ad;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+select {
+  display: block;
+  width: 100%;
+  max-width: 318px;
+  padding: 8px;
+  font-size: medium;
+  line-height: 16px;
+  color: #2e2e2e;
+  background-color: #ffffff;
+  background-image: none;
+  border: 1px solid #0e62ad;
+  border-radius: 4px;
+  -ms-word-break: normal;
+  word-break: normal;
+}
+

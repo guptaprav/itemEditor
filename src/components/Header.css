@@ -1,0 +1,39 @@
+
+.header {
+  grid-area: header;
+  display: flex;
+  padding: 10px;
+  background-color: #0e62ad;
+}
+.header-title {
+  width: 50%;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 36.4px;
+  margin-left: 24px;
+  color: whitesmoke;
+}
+.header-actions {
+  width: 50%;
+  justify-content: space-evenly;
+  display: inline-flex;
+}
+
+.header-actions button {
+  margin: 0 10px;
+}
+
+button {
+  color: #0e62ad;
+  border: 0px;
+  border-radius: 4px;
+  padding: 6px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: white;
+  color: #0e62adda;
+}

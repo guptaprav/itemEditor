@@ -1,0 +1,27 @@
+.aside {
+  width: 80%;
+  height: calc(100vh - 42px);
+  background-color: #0e62ad0f;
+}
+
+.aside div {
+  padding: 10px;
+  list-style: none;
+  border-bottom: 1px solid #0e62ad;
+}
+
+.aside label {
+  color: #0e62ad;
+  font-weight: 200;
+  line-height: 30px;
+  font-size: x-large;
+}
+
+.aside > div:hover {
+  background-color: white;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: white;
+}
