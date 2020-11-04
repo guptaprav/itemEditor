@@ -8,17 +8,15 @@ State management is via Context / Reducer hooks
 **App.js**
 - Includes context,
   * ItemContext
-  * ActionContext
 - Includes reducers,
   * ItemReducer
-  * ActionReducer
 
 **Components**
 * Header, includes title and buttons
 * ItemList (populates from dynamic data itemList.js)
 * ItemDetails (for selected item, populates the fields dynamically)
 * Fields types *text*, *checkbox*, *select*
-* Utility Stack function to store Undo and Redo data
+* <NOT USED> Utility Stack function to store Undo and Redo data (in this case array may be a better option in time complexity)
 
 **Responsive**
 * Base view is based of grid and templates
@@ -29,6 +27,7 @@ State management is via Context / Reducer hooks
 * Styles provided as CSS
 * Uses classNames, element tags, pseudo-classes, and, attributes
 * Provide *active* class to selected item from the item list
+* Enable or disable Undo / Redo buttons when content is not available
 
 **Functioning**
 * Header
@@ -36,14 +35,15 @@ State management is via Context / Reducer hooks
 * List click to show details, dynamically creating fields
 * Details show original values
 * Details can be modified
+* Maintain each state and use Undo and Redo to go to previous or next saved state
 
 **Buttons**
-* Save, working, saves data to current object (deep copy)
-* Cancel, working, rollsback all changes
+* Save, working, pass items to the onSave callback
+* Cancel, working, rollsback all changes, empty undo and redo lists
+* Undo, working, move to previous state, undo edit or item scope, retains all previous user actions since begining or last cancel
+* Redo, working, move to next state, redo rolledback edit or item scope, retains all rollbacks since begining or last cancel
 
-**TODO and Improvements**
-* Undo command, to use a stack datastructure (included)
-* Redo command, to use a stack datastructure (included)
-* Code cleanup and refactor
+**Improvements**
+* refactor
 * Testing
 * CSS-in-JS
