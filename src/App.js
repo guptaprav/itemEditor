@@ -49,14 +49,19 @@ const itemReducer = (state = initialState, action) => {
         undoList: [...undoListUpdate, stateAtUpdate]
       };
     case 'ACTION_SAVE':
-      
+
       return {
         ...state
       };
     case 'ACTION_CANCEL':
+      const { undoList: undoAtCancel } = state;
+
+      if (!undoAtCancel.length) return state;
+
+      const [newOriginalState, ...rest] = undoAtCancel;
 
       return {
-        ...state,
+        ...newOriginalState,
         undoList: [],
         redoList: []
       };
