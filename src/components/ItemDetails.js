@@ -1,103 +1,76 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { ActionContext, ItemContext } from '../App';
+import { ItemContext } from '../App';
 import './ItemDetails.css';
 
 const ItemDetails = () => {
-  const dispatchAction = useContext(ActionContext);
-  const { item: { selectedItem, updatedItem }, dispatchItem } = useContext(ItemContext);
-  const { fields } = selectedItem;
-  const { fields: updatedFields } = updatedItem || {};
-  // const [fieldItems, setFieldItems] = useState(fields);
-  const fieldItems = updatedFields || fields;
-
+  const { itemState, dispatch } = useContext(ItemContext);
+  const { selectedItem } = itemState;
+  const [currentItem, setCurrentItem] = useState(selectedItem);
+  const { fields } = currentItem;
+  const [currentFields, setCurrentFields] = useState(fields);
+  
   useEffect(() => {
-    // modify current selected item, on item change
-    // if(!updatedItem) {
-      // setFieldItems(fields);
-    // } else {
-    //   setFieldItems(updatedItem);
-    // }
-  }, [fields]);
+    setCurrentItem(selectedItem);
+    setCurrentFields(fields);
+  }, [fields,selectedItem]);
 
   const dispatchUpdate = (fieldItems) => {
-    // Dispatch to save change in changeStack
-    dispatchItem({
+    dispatch({
       type: 'UPDATED_ITEM',
-      payload: { ...selectedItem, fields: fieldItems }
-    });
-  };
-
-  const dispatchCancel = () => {
-    // Dispatch to cancel any update change in changeStack
-    dispatchItem({
-      type: 'CANCEL_ITEM'
+      payload: { ...currentItem, fields: fieldItems }
     });
   };
 
   const handleInputChange = (evt, field) => {
-    const updatedFields = fieldItems.map(fieldItem => {
+    const updatedFields = fields.map(fieldItem => {
       if(fieldItem.id === field.id) {
         return { ...field, fieldValue: evt.target.value }
       }
 
-      // Undo and Redo will toggle changeStack
       return fieldItem;
     });
 
-    // setFieldItems(updatedFields);
     dispatchUpdate(updatedFields);
   };
 
   const handleToggleChange = (evt, field) => {
-    const updatedFields = fieldItems.map(fieldItem => {
+    const updatedFields = fields.map(fieldItem => {
       if(fieldItem.id === field.id) {
         return { ...field, fieldValue: evt.target.checked }
       }
 
-      // Undo and Redo will toggle changeStack
       return fieldItem;
     });
     
-    // setFieldItems(updatedFields);
     dispatchUpdate(updatedFields);
   };
 
   const handleOptionChange = (evt, field) => {
-    const updatedFields = fieldItems.map(fieldItem => {
+    const updatedFields = fields.map(fieldItem => {
       if(fieldItem.id === field.id) {
         return { ...field, fieldValue: evt.target.value }
       }
 
-      // Undo and Redo will toggle changeStack
       return fieldItem;
     });
     
-    // setFieldItems(updatedFields);
     dispatchUpdate(updatedFields);
   };
 
   const handleSubmit = evt => {
     evt.preventDefault();
 
-    // if(fieldItems) {
-    //   dispatchCancel();
-
-      dispatchAction({
-        type: 'ACTION_SAVE',
-        payload: fieldItems
-      });
-    // } else {
-    //   return false;
-    // }
+    dispatch({
+      type: 'ACTION_SAVE',
+      payload: fields
+    });
   };
-
-  console.log('updatedItem, ', updatedItem);
 
   return (
     <div className="content">
       <form onSubmit={handleSubmit}>
       {
-        fieldItems.map(field => {
+        currentFields.map(field => {
           const { id, fieldName, fieldType, fieldValue, fieldOptions } = field;
           
           switch (fieldType) {

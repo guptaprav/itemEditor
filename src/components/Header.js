@@ -1,49 +1,47 @@
-import React, { useContext } from 'react';
-import { ActionContext, ItemContext } from '../App';
+import React, { useEffect, useContext } from 'react';
+import { ItemContext } from '../App';
 import './Header.css';
 
-const TITLE = 'Item Editor';
-
 const Header = () => {
-  const dispatch = useContext(ActionContext);
-  const { item: { updatedItem }, dispatchItem } = useContext(ItemContext);
+  const { itemState: { title, items, undoList, redoList, onSave }, dispatch } = useContext(ItemContext);
   
   const handleUndo = () => {
-    dispatch({ type: 'ACTION_UNDO' });
+    dispatch({
+      type: 'ACTION_UNDO'
+    });
   };
 
   const handleRedo = () => {
-    dispatch({ type: 'ACTION_REDO' });
+    dispatch({
+      type: 'ACTION_REDO'
+    });
   };
 
-  const handleSave = () => {
-    if (!updatedItem)  return false;
-
-    dispatch({
-      type: 'ACTION_SAVE',
-      payload: updatedItem
-    });
-
-    // remove any update state
-    // handleCancel();
+  const handleSave = (callback) => {
+    // handle Save with callback
+    // onSave callback
+    callback(items);
+    // dispatch({
+    //   type: 'ACTION_SAVE'
+    // });
   };
 
   const handleCancel = () => {
-    dispatchItem({
-      type: 'CANCEL_ITEM'
+    dispatch({
+      type: 'ACTION_CANCEL'
     })
   };
 
   return (
     <div className="header">
-      <div className="header-title">{TITLE}</div>
+      <div className="header-title">{title}</div>
       <div className="header-actions">
         <div>
-          <button type="button" onClick={handleUndo}>Undo</button>
-          <button type="button" onClick={handleRedo}>Redo</button>
+          <button type="button" disabled={!undoList.length} onClick={handleUndo}>Undo</button>
+          <button type="button" disabled={!redoList.length} onClick={handleRedo}>Redo</button>
         </div>
         <div>
-          <button type="button" onClick={handleSave}>Save</button>
+          <button type="button" onClick={() => handleSave(onSave)}>Save</button>
           <button type="button" onClick={handleCancel}>Cancel</button>
         </div>
       </div>

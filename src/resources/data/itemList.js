@@ -3,7 +3,6 @@ export const itemList = [
     id: 1,
     name: 'ABC',
     title: 'Abc Items',
-    onSave: () => { console.log('Save for ', this.name) },
     fields: [
       {
         id: 'field1',
@@ -35,7 +34,6 @@ export const itemList = [
     id: 2,
     name: 'DEF',
     title: 'Def Items',
-    onSave: () => { console.log('Save for ', this.name) },
     fields: [
       {
         id: 'field1',
@@ -67,7 +65,6 @@ export const itemList = [
     id: 3,
     name: 'GHI',
     title: 'Ghi Items',
-    onSave: () => { console.log('Save for ', this.name) },
     fields: [
       {
         id: 'field1',

@@ -1,12 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { ItemContext } from '../App';
 import './ItemList.css';
 
-const ItemList = ({ itemList }) => {
-  const { item: { selectedItem }, dispatchItem } = useContext(ItemContext);
+const ItemList = () => {
+  const {  itemState, dispatch } = useContext(ItemContext);
+  const { items, selectedItem } = itemState;
+  const [currentItems, setCurrentItems] = useState(items);
+  const [currentItem, setCurrentItem] = useState(selectedItem);
+ 
+  useEffect(() => {
+    setCurrentItems(items);
+    setCurrentItem(selectedItem);
+  }, [items,selectedItem]);
 
   const handleItemChange = item => {
-    dispatchItem({
+    dispatch({
       type: 'SELECT_ITEM',
       payload: item
     });
@@ -15,8 +23,8 @@ const ItemList = ({ itemList }) => {
   return (
     <div className="aside">
       {
-        itemList.map(item => (
-        <div key={item.id} className={(selectedItem.id === item.id) ? 'selected' : ''} onClick={() => handleItemChange(item)}>
+        currentItems.map(item => (
+        <div key={item.id} className={(currentItem.id === item.id) ? 'selected' : ''} onClick={() => handleItemChange(item)}>
           <label>{item.name}</label>
         </div>
         ))
